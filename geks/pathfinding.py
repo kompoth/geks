@@ -100,6 +100,10 @@ def dijkstra_path(
     -------
     list[hexagon.Hex]
         Path to target hexagon.
+    int
+        Total cost of a resulting path.
+    int
+        Number of pathfinding iterations.
     """
     if target not in hm.map:
         raise ValueError(f"Hexagon '{target}' is not mapped.") 
