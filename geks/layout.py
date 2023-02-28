@@ -24,8 +24,8 @@ CORNERS = np.array((
 
 class Layout:
     """Screen layout of hexagons."""
-    def __init__(self, flat=True):
-        self.size = np.array((1, 1))
+    def __init__(self, flat=True, size=(1, 1)):
+        self.size = np.array(size)
         bypass = 1 if flat else -1
 
         # Conversion matrices
@@ -33,8 +33,6 @@ class Layout:
         self.p2h = P2H[::bypass, ::bypass]
         # Corner directions
         self.corners = self.size * CORNERS[:, ::bypass]
-        # Flat-top is 0 grad, pointy-top is 30
-        self.orientation = 0
 
     def hex2pixel(self, he):
         """Convert screen coordinates to hexagonal."""

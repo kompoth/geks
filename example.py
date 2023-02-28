@@ -7,10 +7,10 @@ import geks
 
 # Create rectangular map of unblocked hexagons with pointy top
 default_value = {'price': 1, 'blocked': False}
-hm = geks.Hexmap(default_value, dims=(12, 8))
+hm = geks.Hexmap(default_value, dims=(12, 8), flat=True)
 
 # Initialize convertion to screen coordinates and front end
-l = geks.Layout()
+l = geks.Layout(flat=True)
 mpl = geks.FrontMPL(l)
 
 # Set walls

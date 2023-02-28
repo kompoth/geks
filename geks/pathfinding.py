@@ -74,7 +74,7 @@ def dijkstra_path(
     hm, start, target, distance=100,
     block_func=lambda x: False,
     cost_func=lambda x: 1,
-    algoritm="fast"
+    algoritm="a_star"
 ):
     """
     Find a path to a hexagon.

@@ -4,6 +4,7 @@ import numpy as np
 from .hexagon import Hex
 from .geometry import hex_circle
 
+
 class Hexmap:
     """Base data structure for a collection of hexagons."""
     def __init__(self, default, radius=None, dims=None, flat=True):
@@ -26,6 +27,7 @@ class Hexmap:
             If True, map is constructed for flat top haxagons. Neccessary
             only for rectangular maps.
         """
+        # Build map
         self.map = {}
         if radius:
             zero = Hex((0, 0))
