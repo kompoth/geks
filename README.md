@@ -34,6 +34,12 @@ impassable walls.
 User may determine cost of movement over each hexagon (e.g. travel time) and
 what hexagons are blocked for trespassing (e.g. have walls on them).
 
+## Dependencies
+Geks uses following packages not included in standard library:
+- numpy
+- pytest (optional)
+- matplotlib (optional)
+
 ## Credits
 This package is mostly based on the theory from
 [Red Blob Games articles](https://www.redblobgames.com/).
