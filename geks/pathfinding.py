@@ -1,7 +1,8 @@
 """Pathfinding routines."""
 from heapq import heappop, heappush
 
-from .utils import hex_distance
+from .geometry import hex_distance
+
 
 def dijkstra_scan(
     hm, start, distance=100, 

@@ -1,9 +1,10 @@
 """
-Operations with hexagons.
+Geometrical operations with hexagons.
 """
 import numpy as np
 
 from .hexagon import Hex
+
 
 def hex_distance(he1, he2):
     """Returns distance between two hexagons in steps."""

@@ -2,7 +2,7 @@ import copy
 import numpy as np
 
 from .hexagon import Hex
-from .utils import hex_circle
+from .geometry import hex_circle
 
 class Hexmap:
     """Class for a space of hexagons."""
