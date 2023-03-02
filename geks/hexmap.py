@@ -34,6 +34,8 @@ class RoundHexmap(Hexmap):
             Radius of the map to be constructed.
         """
         super().__init__()
+        self.radius = radius
+
         zero = Hex((0, 0))
         for he in hex_circle(zero, radius):
             self.map[he] = copy.copy(default)
@@ -55,6 +57,8 @@ class RectHexmap(Hexmap):
             If True, flat top hexagonal system is used, pointy otherwise.
         """
         super().__init__()
+        self.dims = dims
+        self.flat = flat
 
         # This is slightly faster then two nested for-loops
         grid = np.array(
@@ -66,3 +70,21 @@ class RectHexmap(Hexmap):
             grid[:, 0] -= grid[:, 1] // 2
         for pos in grid:
             self.map[Hex(pos)] = copy.copy(default)
+
+    def corners(self):
+        """Returns corner hexagons of a map."""
+        width = self.dims[0]
+        height = self.dims[1]
+        if self.flat:
+            r_offset = (width - 1) // 2
+            nw = Hex((0, 0))
+            ne = Hex((width - 1, - r_offset))
+            sw = Hex((0, height - 1))
+            se = Hex((width - 1, - r_offset + height - 1))
+        else:
+            q_offset = (height - 1) // 2
+            nw = Hex((0, 0))
+            ne = Hex((width - 1, 0))
+            sw = Hex((- q_offset, height - 1))
+            se = Hex((- q_offset + width - 1, height - 1)) 
+        return (nw, ne, sw, se)
