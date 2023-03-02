@@ -56,7 +56,7 @@ class FrontMPL:
         fill=False, fillcolor=None, edgecolor=None
     ):
         """Renders a trace of hexagons'."""
-        if len(path) < 2:
+        if not path or len(path) < 2:
             return
         he0 = path[0]
         for he in path[1:]:

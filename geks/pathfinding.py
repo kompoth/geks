@@ -98,9 +98,9 @@ def dijkstra_path(
 
     Returns
     -------
-    list[hexagon.Hex]
+    list[hexagon.Hex] or None
         Path to target hexagon.
-    int
+    int or None
         Total cost of a resulting path.
     int
         Number of pathfinding iterations.
@@ -126,7 +126,7 @@ def dijkstra_path(
     )
     
     if target not in traces:
-        return None, None, None
+        return None, None, len(traces)
     trace = [target]
     he = target
     while he != start:
