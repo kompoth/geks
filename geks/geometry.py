@@ -21,7 +21,9 @@ def hex_line(he1, he2):
 def hex_ring(center, radius):
     """Returns a ring of hexagons."""
     ring = []
-    he = Hex(center.neighbor(4).pos * radius)
+    he = center
+    for i in range(radius):
+        he = he.neighbor(4)
     for direction in range(6):
         for curve in range(radius):
             ring.append(he)
