@@ -1,4 +1,4 @@
-# Geks - hexagonal coordinates package
+# Geks - hexagonal maps package
 Geks implements basic operations in a plain hexagonal space neccessary for
 creating maps of hexagonal tiles. It also allows to build paths between tiles
 using some well known algorithms.
