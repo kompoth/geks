@@ -13,6 +13,9 @@ class Hexmap:
     def __getitem__(self, pos):
         return self.map[Hex(pos)]
     
+    def __setitem__(self, pos, value):
+        self.map[Hex(pos)] = value
+    
     def is_mapped(self, he):
         return he in self.map
     
@@ -32,7 +35,7 @@ class RoundHexmap(Hexmap):
         """
         super().__init__()
         zero = Hex((0, 0))
-        for he in hex_circle(self.zero, radius):
+        for he in hex_circle(zero, radius):
             self.map[he] = copy.copy(default)
 
     
