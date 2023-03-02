@@ -26,13 +26,16 @@ class FrontMPL:
         plt.autoscale(enable = True)
         plt.show()
         
-    def plot_hex(self, he, fill=False, fillcolor=None, edgecolor=None):
+    def plot_hex(
+        self, he, fill=False, fillcolor=None, edgecolor=None, alpha=1
+    ):
         """Renders hexagon."""
         patch = Polygon(
             self.layout.hex_corners(he), 
             fill=fill,
             facecolor=fillcolor,
-            edgecolor=edgecolor
+            edgecolor=edgecolor,
+            alpha=alpha
         )
         self.ax.add_patch(patch)
     
@@ -55,7 +58,7 @@ class FrontMPL:
         self, path, width=0.1, 
         fill=False, fillcolor=None, edgecolor=None
     ):
-        """Renders a trace of hexagons'."""
+        """Renders a trace of arrows connecting given hexagons."""
         if not path or len(path) < 2:
             return
         he0 = path[0]
