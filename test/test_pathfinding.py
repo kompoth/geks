@@ -40,7 +40,7 @@ def test_a_star_distance():
         hm, start, target, distance=6 
     )
     assert not path
-    assert nstep == 0
+    assert nstep is None 
     
 
 def test_a_star_unavailable():
@@ -59,4 +59,4 @@ def test_a_star_unavailable():
         block_func=lambda x: hm.map[x] 
     )
     assert not path
-    assert nstep == 0
+    assert nstep is None 
