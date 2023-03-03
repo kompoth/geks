@@ -48,9 +48,5 @@ Geks uses following packages not included in the standard library:
 - `matplotlib` (optional, tested with v3.6.2)
 
 ## Credits
-Articles by [Red Blob Games](https://www.redblobgames.com/) on grids,
-pathfinding and many other 
-
-
-
-This package is mostly based on the theory from [Red Blob Games articles]().
+A lot of theory on grids, pathfinding and other topics was taken from articles
+by [Red Blob Games](https://www.redblobgames.com/).
