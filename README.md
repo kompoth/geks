@@ -34,11 +34,13 @@ impassable walls.
 User may determine cost of movement over each hexagon (e.g. travel time) and
 what hexagons are blocked for trespassing (e.g. have walls on them).
 
-## Dependencies
-Geks uses following packages not included in standard library:
-- numpy
-- pytest (optional)
-- matplotlib (optional)
+## Requirements
+Written on Python 3 (tested with v3.10.9).
+
+Geks uses following packages not included in the standard library:
+- `numpy` (tested with v1.23.5)
+- `pytest` (optional, tested with v7.2.1)
+- `matplotlib` (optional, test with v3.6.2)
 
 ## Credits
 This package is mostly based on the theory from
