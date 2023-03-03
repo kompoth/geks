@@ -27,7 +27,7 @@ def dijkstra_scan(
     cost_func : callable, default: 1 for all hexagons
         Takes hexagon, returns cost of step over a hexagon.
     break_func : function, default: exit normally
-        Takes hexagon, returns True if BFS loop must be broken.
+        Takes hexagon, returns True when the scan loop must be broken.
     priority_func : callable, default: steps to reach hexagon
         Takes hexagon, distance to it and iteration, returns priority.
         value (smallest is first)

@@ -18,14 +18,19 @@ methods `hex2pixel` and `pixel2hex` of a `Layout` class.
 
 ## Pathfinding
 At this point Geks can calculate a path between two mapped hexagons using
-[Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm).
-There are also two modifications of this method:
-[A\*](https://en.wikipedia.org/wiki/A*_search_algorithm) and
+[Dijkstra's algorithm](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm),
+[A\* method](https://en.wikipedia.org/wiki/A*_search_algorithm) and
 [greedy search](https://en.wikipedia.org/wiki/Greedy_algorithm).
-The original algorithm is useful for determining all possible movement options
+The first approach is useful for determining all possible movement options
 for a given hexagon. A* method is more efficient for a targeted pathfinding.
-Greedy search is usually more efficient than A* in terms of calculation time but
-may return inefficient path.
+Greedy search is usually more efficient than A* in terms of calculation time
+but may result in an inefficient solution.
+
+These methods share the same basic concept. Therefore there are no separate
+functions for them, all three algorithms are built on top of the same
+`dijkstra_scan` function with different parameters. Use `dijkstra_path` to
+build a path to a specific tile (A* is used by default) and `dijkstra_scan`
+to determine all possible movement options.
 
 On the following image green hexagons denote rugged terrain, grey tiles are
 impassable walls.
@@ -43,5 +48,9 @@ Geks uses following packages not included in the standard library:
 - `matplotlib` (optional, tested with v3.6.2)
 
 ## Credits
-This package is mostly based on the theory from
-[Red Blob Games articles](https://www.redblobgames.com/).
+Articles by [Red Blob Games](https://www.redblobgames.com/) on grids,
+pathfinding and many other 
+
+
+
+This package is mostly based on the theory from [Red Blob Games articles]().
