@@ -1,23 +1,24 @@
 [build-system]
 requires = [
-    "setuptools",
-    "Cython >=3.0.2",
-    "numpy >=1.23.5; python_version <3.12",
-    "numpy>=1.26.0b1; python_version >=3.12"
+    'setuptools',
+    'Cython >= 3.0.2',
+    # https://github.com/numpy/numpy/issues/23808#issuecomment-1678677094
+    'numpy >= 1.23.5; python_version < "3.12.0rc1"',
+    'numpy >= 1.26.0b1; python_version >= "3.12.0rc1"'
 ]
-build-backend = "setuptools.build_meta"
+build-backend = 'setuptools.build_meta'
 
 [project]
-name = "geks"
-version = "0.1.0"
-requires-python = ">=3.10"
-dependencies = ["numpy >=1.23.5"]
+name = 'geks'
+version = '0.1.0'
+requires-python = '>= 3.10'
+dependencies = ['numpy >= 1.23.5']
 
 [project.optional-dependencies]
-mpl = ["matplotlib >=3.6.3"]
+mpl = ['matplotlib >= 3.6.3']
 
 [tool.setuptools]
-packages = ["geks", "geks.front", "geks.cython"]
+packages = ['geks', 'geks.front', 'geks.cython']
 
 [tool.black]
 line-length = 79
