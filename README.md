@@ -13,8 +13,10 @@ Currently there is no PyPI package.
 To install development version from GitHub (preferably in a virtual environment):
 ```bash
 git clone https://github.com/kompoth/geks.git
-make install
+make install-mpl
 ```
+Suffix `mpl` means that Geks will be installed with `matplotlib` that powers a
+testing front-end. See other build and install commands in `Makefile`.
 
 ## Credits
 

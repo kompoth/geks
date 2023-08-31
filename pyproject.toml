@@ -1,16 +1,19 @@
 [build-system]
-requires = ["setuptools", "Cython", "numpy"]
+requires = [
+    "setuptools",
+    "Cython >=3.0.2",
+    "numpy >=1.23.5"
+]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "geks"
 version = "0.1.0"
-dependencies = [
-    "numpy >= 1.23.5",
-]
+requires-python = ">=3.10"
+dependencies = ["numpy >=1.23.5"]
 
 [project.optional-dependencies]
-mpl = ["matplotlib >= 3.6.2"]
+mpl = ["matplotlib >=3.6.3"]
 
 [tool.setuptools]
 packages = ["geks", "geks.front", "geks.cython"]
