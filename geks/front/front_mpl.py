@@ -51,7 +51,7 @@ class FrontMPL:
         cmap = LinearSegmentedColormap.from_list("terrain", colors)
 
         patches = []
-        for he, val in hm.map.items():
+        for he, val in hm.items():
             if ignore_func(he):
                 continue
             patch = Polygon(self.layout.hex_corners(he), color=cmap(val))

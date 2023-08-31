@@ -12,14 +12,14 @@ def gen_river_path(hm, source, ocean_lvl):
         hm,
         source,
         block_unmapped=False,
-        block_func=lambda cur, ne: hm[cur] < hm.map.get(ne, 0),
-        break_func=lambda cur, ne: not hm.is_mapped(ne) or hm[ne] <= ocean_lvl,
+        block_func=lambda cur, ne: hm[cur] < hm.get(ne, 0),
+        break_func=lambda cur, ne: ne not in hm or hm[ne] <= ocean_lvl,
         priority_func=lambda ne, d, i: hm[ne],
     )
 
     estuary = None
     for he in preds.keys():
-        if not hm.is_mapped(he) or hm[he] <= ocean_lvl:
+        if he not in hm or hm[he] <= ocean_lvl:
             estuary = he
             break
     if estuary is None:
@@ -50,7 +50,7 @@ def gen_river_edges(hm, river, ocean_lvl, w=0.5):
 
         for nrot in range(5):
             hr = hex_rotate(hc, hr, rot)
-            done = not hm.is_mapped(hr) or hm[hr] <= ocean_lvl
+            done = hr not in hm or hm[hr] <= ocean_lvl
             if hr == river[step + 1] or done:
                 break
             else:
@@ -63,3 +63,26 @@ def gen_river_edges(hm, river, ocean_lvl, w=0.5):
             rot = -1 * rot
         step += 1
     return edges
+
+
+#def generate_rivers(
+#    hm,
+#    num_rivers,
+#    ocean_alt=0.50,
+#    source_min_alt=0.90,
+#    edgify=True
+#):
+#    # Prepare pool of points that can be river sources
+#    pool = [he for he, alt in hm.items() if alt > source_alt]
+#
+#    # Generate river paths
+#    step = 0
+#    rivers = []
+#    while step < num_rivers and pool:
+#        src = random.choice(pool)
+#        river = geks.gen_river_path(hm, src, ocean_lvl)
+#        rivers.append(river)
+#        busy = [he for he in river] + geks.hex_circle(src, 2)
+#        pool = [he for he in pool if he not in busy]
+#        step += 1
+
