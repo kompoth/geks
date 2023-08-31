@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools", "Cython", "numpy"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geks"
+version = "0.1.0"
+dependencies = [
+    "numpy >= 1.23.5",
+]
+
+[project.optional-dependencies]
+mpl = ["matplotlib >= 3.6.2"]
+
+[tool.setuptools]
+packages = ["geks", "geks.front", "geks.cython"]
+
+[tool.black]
+line-length = 79
