@@ -1,4 +1,4 @@
-name: Python package
+name: Development
 on:
   push:
     branches: [ main ]
@@ -7,6 +7,7 @@ on:
 
 jobs:
   test:
+    name: Test ${{ matrix.platform }} Python ${{ matrix.python-version }} 
     strategy:
       max-parallel: 6
       matrix:
