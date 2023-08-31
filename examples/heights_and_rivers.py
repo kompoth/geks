@@ -23,33 +23,13 @@ mpl.plot_hexmap(
 )
 
 # Prepare pool of points that can be river sources
-pool = [he for he, alt in hm.map.items() if cdf[alt] > 0.90]
+pool = [
+    he for he, alt in hm.items() 
+    if cdf[alt] > 0.90 and len(hm.mapped_neighbors(he)) == 6
+]
 
 # Generate 10 rivers
-step = 0
-all_rivers = []
-while step < 10 and pool:
-    src = random.choice(pool)
-    river = geks.gen_river_path(hm, src, ocean_lvl)
-    all_rivers.append(river)
-    busy = [he for he in river] + geks.hex_circle(src, 2)
-    pool = [he for he in pool if he not in busy]
-    step += 1
-
-    # Draw initial river path
-    mpl.plot_path(river)
-
-# Direct rivers through edges of hexagons and handle mergers
-all_edges = []
-for river in all_rivers:
-    edges = geks.gen_river_edges(hm, river, ocean_lvl)
-    for nit, edge in enumerate(edges):
-        if edge in all_edges:
-            edges = edges[:nit]
-            break
-    all_edges += edges
-    # Draw river
+for edges in geks.generate_rivers(hm, cdf, 10):
     mpl.plot_border(edges, color="#1F3C41", width=1.2)
-del all_edges
 
 mpl.show()

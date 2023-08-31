@@ -1,6 +1,6 @@
 """Rivers generation"""
 from .pathfinding import dijkstra_scan, extract_path
-from .geometry import hex_rotate
+from .geometry import hex_rotate, hex_circle
 from .edge import HexEdge
 
 import random
@@ -65,24 +65,42 @@ def gen_river_edges(hm, river, ocean_lvl, w=0.5):
     return edges
 
 
-#def generate_rivers(
-#    hm,
-#    num_rivers,
-#    ocean_alt=0.50,
-#    source_min_alt=0.90,
-#    edgify=True
-#):
-#    # Prepare pool of points that can be river sources
-#    pool = [he for he, alt in hm.items() if alt > source_alt]
-#
-#    # Generate river paths
-#    step = 0
-#    rivers = []
-#    while step < num_rivers and pool:
-#        src = random.choice(pool)
-#        river = geks.gen_river_path(hm, src, ocean_lvl)
-#        rivers.append(river)
-#        busy = [he for he in river] + geks.hex_circle(src, 2)
-#        pool = [he for he in pool if he not in busy]
-#        step += 1
+def generate_rivers(
+    hm,
+    cdf,
+    num_rivers,
+    ocean_lvl=0.50,
+    source_min_lvl=0.90,
+    source_min_dist=2,
+    edgify=True
+):
+    # Prepare pool of points that can be river sources
+    pool = [
+        he for he, alt in hm.items()
+        if cdf[alt] > source_min_lvl and len(hm.mapped_neighbors(he)) == 6
+    ]
 
+    # Generate river paths
+    it = 0
+    rivers = []
+    while it < num_rivers and pool:
+        source = random.choice(pool)
+        river = gen_river_path(hm, source, ocean_lvl)
+        rivers.append(river)
+        busy = [he for he in river] + hex_circle(source, source_min_dist)
+        pool = [he for he in pool if he not in busy]
+        it += 1
+
+    if not edgify:
+        return rivers
+
+    # Direct rivers through edges of hexagons and handle mergers
+    all_edges = []
+    for river in rivers:
+        river_edges = gen_river_edges(hm, river, ocean_lvl)
+        for nit, edge in enumerate(river_edges):
+            if edge in [ed for sublist in all_edges for ed in sublist]:
+                river_edges = river_edges[:nit]
+                break
+        all_edges.append(river_edges)
+    return all_edges
