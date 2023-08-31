@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 450
     env:
-      CIBW_BUILD: "cp312-*"
+      CIBW_BUILD: "cp312-*_x86_64"
 
     steps:
     - name: Checkout
