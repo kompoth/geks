@@ -9,6 +9,7 @@ jobs:
       matrix:
         platform: [ ubuntu-latest, windows-latest, macos-latest ]
     runs-on: ${{ matrix.platform }}
+    timeout-minutes: 450
 
     steps:
     - name: Checkout
@@ -30,3 +31,4 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         path: ./wheelhouse/*.whl
+        retention-days: 1
