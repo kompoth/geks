@@ -10,6 +10,8 @@ jobs:
         platform: [ ubuntu-latest, windows-latest, macos-latest ]
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 450
+    env:
+      CIBW_BUILD: "cp10-* cp11-*"
 
     steps:
     - name: Checkout
