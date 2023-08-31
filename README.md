@@ -3,7 +3,7 @@
 Geks is a toolkit for hexagonal mapmaking. 
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/kompoth/geks/main/img/example.png" width="600">
+    <img src="https://raw.githubusercontent.com/kompoth/geks/main/img/example.png" width="400">
 </p>
 
 ## Installation
