@@ -6,20 +6,20 @@ from .edge import HexEdge
 import random
 
 
-def gen_river_path(hm, source, ocean_lvl):
+def gen_river_path(hm, source, ocean_alt):
     """Wrapper for Dijkstra method to find fastest path to ocean"""
     preds, costs = dijkstra_scan(
         hm,
         source,
         block_unmapped=False,
         block_func=lambda cur, ne: hm[cur] < hm.get(ne, 0),
-        break_func=lambda cur, ne: ne not in hm or hm[ne] <= ocean_lvl,
+        break_func=lambda cur, ne: ne not in hm or hm[ne] <= ocean_alt,
         priority_func=lambda ne, d, i: hm[ne],
     )
 
     estuary = None
     for he in preds.keys():
-        if he not in hm or hm[he] <= ocean_lvl:
+        if he not in hm or hm[he] <= ocean_alt:
             estuary = he
             break
     if estuary is None:
@@ -31,7 +31,7 @@ def gen_river_path(hm, source, ocean_lvl):
     return path
 
 
-def gen_river_edges(hm, river, ocean_lvl, w=0.5):
+def gen_river_edges(hm, river, ocean_alt, w=0.5):
     """
     Generates a list of hex edges from a hexagon list that
     describes river path
@@ -50,7 +50,7 @@ def gen_river_edges(hm, river, ocean_lvl, w=0.5):
 
         for nrot in range(5):
             hr = hex_rotate(hc, hr, rot)
-            done = hr not in hm or hm[hr] <= ocean_lvl
+            done = hr not in hm or hm[hr] <= ocean_alt
             if hr == river[step + 1] or done:
                 break
             else:
@@ -67,17 +67,16 @@ def gen_river_edges(hm, river, ocean_lvl, w=0.5):
 
 def generate_rivers(
     hm,
-    cdf,
     num_rivers,
-    ocean_lvl=0.50,
-    source_min_lvl=0.90,
+    ocean_alt,
+    source_min_alt,
     source_min_dist=2,
     edgify=True
 ):
     # Prepare pool of points that can be river sources
     pool = [
         he for he, alt in hm.items()
-        if cdf[alt] > source_min_lvl and len(hm.mapped_neighbors(he)) == 6
+        if alt > source_min_alt and len(hm.mapped_neighbors(he)) == 6
     ]
 
     # Generate river paths
@@ -85,7 +84,7 @@ def generate_rivers(
     rivers = []
     while it < num_rivers and pool:
         source = random.choice(pool)
-        river = gen_river_path(hm, source, ocean_lvl)
+        river = gen_river_path(hm, source, ocean_alt)
         rivers.append(river)
         busy = [he for he in river] + hex_circle(source, source_min_dist)
         pool = [he for he in pool if he not in busy]
@@ -97,7 +96,7 @@ def generate_rivers(
     # Direct rivers through edges of hexagons and handle mergers
     all_edges = []
     for river in rivers:
-        river_edges = gen_river_edges(hm, river, ocean_lvl)
+        river_edges = gen_river_edges(hm, river, ocean_alt)
         for nit, edge in enumerate(river_edges):
             if edge in [ed for sublist in all_edges for ed in sublist]:
                 river_edges = river_edges[:nit]
