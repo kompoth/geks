@@ -1,7 +1,10 @@
-.PHONY: build dist redist install install-mpl clean uninstall
+.PHONY: build build_ext dist redist install install-mpl clean uninstall
 
 build:
 	USE_CYTHON=1 python setup.py build
+
+build_ext:
+	USE_CYTHON=1 python setup.py build_ext --inplace
 
 dist:
 	USE_CYTHON=1 python setup.py sdist bdist_wheel

@@ -30,7 +30,7 @@ jobs:
       run: flake8
   
     - name: Build extensions
-      run: USE_CYTHON=1 python setup.py build
+      run: make build_ext 
   
     - name: Test with pytest
       run: pytest 
