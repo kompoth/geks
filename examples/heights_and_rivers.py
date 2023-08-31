@@ -1,7 +1,6 @@
 import geks
 from geks.front import FrontMPL
 import numpy as np
-import random
 
 # Prepare height map
 hm = geks.RoundHexmap(0, 32)
@@ -24,7 +23,8 @@ mpl.plot_hexmap(
 
 # Prepare pool of points that can be river sources
 pool = [
-    he for he, alt in hm.items() 
+    he
+    for he, alt in hm.items()
     if cdf[alt] > 0.90 and len(hm.mapped_neighbors(he)) == 6
 ]
 

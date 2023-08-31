@@ -20,16 +20,15 @@ class Hexmap:
         if not isinstance(he, Hex):
             he = Hex(he)
         self.__map[he] = value
-    
+
     def __contains__(self, he):
         return he in self.__map
-    
+
     def __len__(self):
         return len(self.__map)
 
     def __iter__(self):
         return self.__map.__iter__()
-    
 
     def get(self, he, otherwise=None):
         return otherwise if he not in self else self.__map[he]
