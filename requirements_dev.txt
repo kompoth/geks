@@ -2,3 +2,4 @@ Cython >=3.0.2
 numpy >=1.23.5
 flake8 >=6.1.0
 pytest >=7.4.0
+wheel >=0.41.2
