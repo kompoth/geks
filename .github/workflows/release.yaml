@@ -7,11 +7,11 @@ jobs:
     name: Build wheels ${{ matrix.platform }}
     strategy:
       matrix:
-        platform: [ ubuntu-latest ]
+        platform: [ ubuntu-latest windows-latest macos-latest ]
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 450
     env:
-      CIBW_BUILD: "cp312-*_x86_64"
+      CIBW_BUILD: "cp310-* cp311-* cp312-*_x86_64"
 
     steps:
     - name: Checkout
