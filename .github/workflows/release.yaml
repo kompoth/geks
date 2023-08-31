@@ -11,7 +11,7 @@ jobs:
     runs-on: ${{ matrix.platform }}
     timeout-minutes: 450
     env:
-      CIBW_SKIP: "cp111-* cp110-*"
+      CIBW_BUILD: "cp311-* cp310-*"
 
     steps:
     - name: Checkout
