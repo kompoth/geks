@@ -43,10 +43,19 @@ jobs:
       run: make build_ext
     - name: Run tests 
       run: pytest --cov=geks test/ --cov-report xml 
-    #- name: Coveralls
-    #  uses: coverallsapp/github-action@v2
-    #  with:
-    #    github-token: ${{ secrets.github_token }}
-    #    file: ./coverage.xml
-    #    flag-name: run-${{ join(matrix.*, '-') }}
-    #    parallel: true
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.github_token }}
+        file: ./coverage.xml
+        flag-name: run-${{ join(matrix.*, '-') }}
+        parallel: true
+
+  finish:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls finished
+      uses: coverallsapp/github-action@v2
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
