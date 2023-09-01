@@ -41,12 +41,12 @@ def gen_river_edges(hm, river, ocean_alt, curv=None):
     rot = 1 if random.random() < 0.5 else -1
     hr = hex_rotate(hc, river[1], -rot)
     edges.append(HexEdge(hc, hr - hc, rot))
-    
+
     if curv is None:
         curv = 0.1
-        curv_step = (1. - curv * 2) / len(river) 
+        curv_step = (1.0 - curv * 2) / len(river)
     else:
-        curv_step = 0.
+        curv_step = 0.0
     step = 1
     done = False
     while step + 1 < len(river) and not done:
@@ -78,18 +78,18 @@ def generate_rivers(
     source_min_alt,
     source_min_dist=2,
     edgify=True,
-    curv=None
+    curv=None,
 ):
     """
     Generates rivers from the given minimal altitude to the ocean level or the
-    map's edges. 
-    
+    map's edges.
+
     Parameters
     ----------
     hm : hexmap.Hexmap
         Collection of hexagons, containing numeric altitudes
     num_rivers : int
-        Number of rivers to generate    
+        Number of rivers to generate
     ocean_alt : int
         Ocean level.
     source_min_alt : int
@@ -102,7 +102,8 @@ def generate_rivers(
     """
     # Prepare pool of points that can be river sources
     pool = [
-        he for he, alt in hm.items()
+        he
+        for he, alt in hm.items()
         if alt > source_min_alt and len(hm.mapped_neighbors(he)) == 6
     ]
 

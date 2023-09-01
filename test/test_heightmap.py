@@ -25,7 +25,7 @@ def test_fill_sinks_py():
     for he in hm:
         alt = hm[he]
         nes = hm.mapped_neighbors(he)
-        if len(nes) == 6: 
+        if len(nes) == 6:
             assert any([alt > hm[ne] for ne in nes])
 
 
@@ -37,5 +37,5 @@ def test_fill_sinks_cy():
     for he in hm:
         alt = hm[he]
         nes = hm.mapped_neighbors(he)
-        if len(nes) == 6: 
+        if len(nes) == 6:
             assert any([alt > hm[ne] for ne in nes])
