@@ -7,7 +7,7 @@ build_ext:
 	USE_CYTHON=1 python setup.py build_ext --inplace
 
 dist:
-	USE_CYTHON=1 python setup.py sdist bdist_wheel
+	USE_CYTHON=1 python setup.py sdist
 
 redist: clean dist
 
