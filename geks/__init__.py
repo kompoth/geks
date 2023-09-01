@@ -8,7 +8,7 @@ from .heightmap import (
     fill_sinks_cy,
     altitude_cdf,
 )
-from .rivers import gen_river_path, gen_river_edges
+from .rivers import generate_rivers
 from .geometry import hex_distance, hex_line, hex_ring, hex_circle, hex_rotate
 
 __all__ = [
@@ -22,8 +22,7 @@ __all__ = [
     "fill_sinks_py",
     "fill_sinks_cy",
     "altitude_cdf",
-    "gen_river_path",
-    "gen_river_edges",
+    "generate_rivers",
     "hex_distance",
     "hex_line",
     "hex_ring",

@@ -9,29 +9,44 @@ class Hexmap:
     """Base class for a hexagonal map data structure."""
 
     def __init__(self):
-        self.map = {}
+        self.__map = {}
 
     def __getitem__(self, he):
         if not isinstance(he, Hex):
             he = Hex(he)
-        return self.map[he]
+        return self.__map[he]
 
     def __setitem__(self, he, value):
         if not isinstance(he, Hex):
             he = Hex(he)
-        self.map[he] = value
+        self.__map[he] = value
+
+    def __contains__(self, he):
+        return he in self.__map
 
     def __len__(self):
-        return len(self.map)
+        return len(self.__map)
 
-    def is_mapped(self, he):
-        return he in self.map
+    def __iter__(self):
+        return self.__map.__iter__()
+
+    def get(self, he, otherwise=None):
+        return otherwise if he not in self else self.__map[he]
+
+    def values(self):
+        return self.__map.values()
+
+    def keys(self):
+        return self.__map.keys()
+
+    def items(self):
+        return self.__map.items()
 
     def is_edge(self, he):
-        return not np.all([self.is_mapped(ne) for ne in he.neighbors()])
+        return not np.all([ne in self for ne in he.neighbors()])
 
     def mapped_neighbors(self, he):
-        return he.neighbors(lambda x: self.is_mapped(x))
+        return he.neighbors(lambda x: x in self)
 
 
 class RoundHexmap(Hexmap):
@@ -53,7 +68,7 @@ class RoundHexmap(Hexmap):
 
         zero = Hex((0, 0))
         for he in hex_circle(zero, radius):
-            self.map[he] = copy.copy(default)
+            self._Hexmap__map[he] = copy.copy(default)
 
     def corners(self):
         """Returns corner hexagons."""
@@ -91,7 +106,7 @@ class RectHexmap(Hexmap):
         else:
             grid[:, 0] -= grid[:, 1] // 2
         for pos in grid:
-            self.map[Hex(pos)] = copy.copy(default)
+            self._Hexmap__map[Hex(pos)] = copy.copy(default)
 
     def corners(self):
         """Returns corner hexagons."""
