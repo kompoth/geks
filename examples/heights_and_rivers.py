@@ -1,7 +1,6 @@
 import geks
 from geks.front import FrontMPL
 import numpy as np
-import random
 
 # Prepare height map
 hm = geks.RoundHexmap(0, 32)

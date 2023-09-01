@@ -17,6 +17,9 @@ install:
 install-mpl:
 	USE_CYTHON=1 pip install .[mpl]
 
+test: build_ext
+	pytest
+
 clean:
 	rm -rf build dist 
 	rm -rf geks/cython/*.c
