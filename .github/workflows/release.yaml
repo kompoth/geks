@@ -26,7 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install cibuildwheel==2.15.0 Cython==3.0.2
     - name: Build wheels
-      run: python -m cibuildwheel --output-dir wheelhouse
+      run: python -m cibuildwheel --output-dir dist
     - uses: actions/upload-artifact@v3
       with:
         path: ./dist/*.whl
@@ -68,4 +68,4 @@ jobs:
         with:
           user: __token__
           password: ${{ SECRETS.TEST_PYPI_TOKEN }}
-          repository_url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/
