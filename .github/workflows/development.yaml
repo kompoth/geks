@@ -1,7 +1,7 @@
 name: Development
 on:
   push:
-    branches: [ main, v0.0.2 ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
