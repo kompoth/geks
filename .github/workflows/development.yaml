@@ -1,13 +1,26 @@
 name: Development
 on:
   push:
-    branches: [ main ]
+    branches: [ main, v0.0.2 ]
   pull_request:
     branches: [ main ]
 
 jobs:
+  lint:
+    name: Check with linters
+    runs-on: ubuntu-latest
+    - name: Checkout
+      uses: actions/checkout@v3  
+    - name: Set up Python 
+      uses: actions/setup-python@v4
+      with:  
+        python-version: "3.11" 
+    - name: Check with linter 
+      run: flake8
+
   test:
     name: Test ${{ matrix.platform }} Python ${{ matrix.python-version }} 
+    need: lint
     strategy:
       max-parallel: 6
       matrix:
@@ -25,7 +38,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements_dev.txt
-    - name: Check with linter 
-      run: flake8
     - name: Run tests 
       run: pytest --cov=geks test/ --cov-report xml 
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./coverage.xml
