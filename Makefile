@@ -1,4 +1,4 @@
-.PHONY: build build_ext dist redist install install-mpl clean uninstall
+.PHONY: build build_ext dist redist install install-mpl test clean uninstall
 
 build:
 	USE_CYTHON=1 python setup.py build
