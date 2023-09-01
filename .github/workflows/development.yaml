@@ -29,11 +29,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements_dev.txt
   
-    - name: Lint with flake8
+    - name: Check with linter 
       run: flake8
   
-    - name: Build extensions
-      run: make build_ext 
-  
-    - name: Test with pytest
-      run: pytest 
+    - name: Run tests 
+      run: make test 

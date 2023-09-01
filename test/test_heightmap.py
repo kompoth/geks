@@ -8,12 +8,12 @@ def test_heightmap():
 
     uncommon = [
         he
-        for he in list(calc.map) + list(orig.map)
-        if he not in calc.map.keys() or he not in orig.map.keys()
+        for he in list(calc) + list(orig)
+        if he not in calc.keys() or he not in orig.keys()
     ]
     assert not uncommon
 
-    for he, val in calc.map.items():
+    for he, val in calc.items():
         assert val is not None
 
 

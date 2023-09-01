@@ -75,8 +75,8 @@ def dijkstra_scan(
     dict of int or float
         Coast of getting to each reached hexagon
     """
-    if start not in hm.map:
-        raise ValueError(f"Hexagon '{start}' is not mapped.")
+    if start not in hm:
+        raise KeyError(f"Hexagon '{start}' is not mapped.")
 
     predecessors = {start: None}
     costs = {start: 0}
@@ -89,7 +89,7 @@ def dijkstra_scan(
         he = heappop(frontier)[1]
         for nhe in he.neighbors():
             # Continue if hex already visited or unavailable
-            off_bounds = block_unmapped and nhe not in hm.map
+            off_bounds = block_unmapped and nhe not in hm
             if off_bounds or block_func(he, nhe) or nhe in predecessors:
                 continue
             # Calculate steps
@@ -148,8 +148,8 @@ def dijkstra_path(
     int or None
         Total cost of a resulting path
     """
-    if target not in hm.map:
-        raise ValueError(f"Hexagon '{target}' is not mapped.")
+    if target not in hm:
+        raise KeyError(f"Hexagon '{target}' is not mapped.")
 
     if algoritm == "a_star":
 

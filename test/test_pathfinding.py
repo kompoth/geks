@@ -7,7 +7,7 @@ def test_a_star_wall():
     start = geks.Hex((0, 0))
     target = geks.Hex((2, -1))
     path, nstep = geks.dijkstra_path(
-        hm, start, target, distance=10, block_func=lambda y, x: hm.map[x]
+        hm, start, target, distance=10, block_func=lambda y, x: hm[x]
     )
     assert nstep == 4
     assert len(path) == 5
@@ -21,7 +21,7 @@ def test_a_star_rugged():
     start = geks.Hex((0, 0))
     target = geks.Hex((2, -1))
     path, nstep = geks.dijkstra_path(
-        hm, start, target, distance=10, cost_func=lambda y, x: hm.map[x]
+        hm, start, target, distance=10, cost_func=lambda y, x: hm[x]
     )
     assert nstep == 6
     assert len(path) == 5
@@ -46,7 +46,7 @@ def test_a_star_unavailable():
     start = geks.Hex((0, 0))
     target = geks.Hex((-7, 7))
     path, nstep = geks.dijkstra_path(
-        hm, start, target, distance=100, block_func=lambda y, x: hm.map[x]
+        hm, start, target, distance=100, block_func=lambda y, x: hm[x]
     )
     assert not path
     assert nstep is None
