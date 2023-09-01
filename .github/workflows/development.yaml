@@ -17,7 +17,7 @@ jobs:
       with:  
         python-version: "3.11" 
     - name: Check with linter 
-      run: flake8
+      run: pip install flake8 && flake8
 
   test:
     name: Test ${{ matrix.platform }} Python ${{ matrix.python-version }} 
@@ -38,11 +38,15 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements_dev.txt
+        pip install -r requirements_test.txt
+    - name: Build extensions
+      run: make build_ext
     - name: Run tests 
       run: pytest --cov=geks test/ --cov-report xml 
-    - name: Coveralls
-      uses: coverallsapp/github-action@v2
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./coverage.xml
+    #- name: Coveralls
+    #  uses: coverallsapp/github-action@v2
+    #  with:
+    #    github-token: ${{ secrets.github_token }}
+    #    file: ./coverage.xml
+    #    flag-name: run-${{ join(matrix.*, '-') }}
+    #    parallel: true
