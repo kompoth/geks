@@ -91,12 +91,14 @@ def generate_rivers(
     num_rivers : int
         Number of rivers to generate
     ocean_alt : int
-        Ocean level.
+        Ocean level
     source_min_alt : int
-        Minimal altitude of the sources
-    edgify : bool, optional
+        Minimal altitude of river sources
+    source_min_dist : int, default: 2
+        Minimal distance between river sources
+    edgify : bool, default: True
         Plot rivers through hexagons' edges
-    curv : None or int, optional
+    curv : int or None, default: None
         If None, edgified river curvature increases as river gets closer to
         the ocean. Otherwise curvature will be fixed, the higher the value is.
     """
