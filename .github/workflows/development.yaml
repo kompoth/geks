@@ -49,9 +49,11 @@ jobs:
         github-token: ${{ secrets.github_token }}
         file: ./coverage.xml
         flag-name: run-${{ join(matrix.*, '-') }}
+        git-branch: main
         parallel: true
 
   finish:
+    name: Finalizing
     needs: test
     runs-on: ubuntu-latest
     steps:
