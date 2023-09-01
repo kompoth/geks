@@ -21,7 +21,7 @@ jobs:
 
   test:
     name: Test ${{ matrix.platform }} Python ${{ matrix.python-version }} 
-    need: lint
+    needs: lint
     strategy:
       max-parallel: 6
       matrix:
