@@ -31,7 +31,7 @@ def gen_river_path(hm, source, ocean_alt):
     return path
 
 
-def gen_river_edges(hm, river, ocean_alt, w=0.5):
+def gen_river_edges(hm, river, ocean_alt, curv=None):
     """
     Generates a list of hex edges from a hexagon list that
     describes river path
@@ -42,6 +42,11 @@ def gen_river_edges(hm, river, ocean_alt, w=0.5):
     hr = hex_rotate(hc, river[1], -rot)
     edges.append(HexEdge(hc, hr - hc, rot))
 
+    if curv is None:
+        curv = 0.1
+        curv_step = (1.0 - curv * 2) / len(river)
+    else:
+        curv_step = 0.0
     step = 1
     done = False
     while step + 1 < len(river) and not done:
@@ -58,10 +63,11 @@ def gen_river_edges(hm, river, ocean_alt, w=0.5):
 
         if nrot == 5:
             raise RuntimeError(f"Too many rotations: {nrot}")
-        if random.random() < w and not done:
+        if random.random() < curv and not done and nrot < 4:
             edges.append(HexEdge(hc, hr - hc, rot))
             rot = -1 * rot
         step += 1
+        curv += curv_step
     return edges
 
 
@@ -71,11 +77,35 @@ def generate_rivers(
     ocean_alt,
     source_min_alt,
     source_min_dist=2,
-    edgify=True
+    edgify=True,
+    curv=None,
 ):
+    """
+    Generates rivers from the given minimal altitude to the ocean level or the
+    map's edges.
+
+    Parameters
+    ----------
+    hm : hexmap.Hexmap
+        Collection of hexagons, containing numeric altitudes
+    num_rivers : int
+        Number of rivers to generate
+    ocean_alt : int
+        Ocean level
+    source_min_alt : int
+        Minimal altitude of river sources
+    source_min_dist : int, default: 2
+        Minimal distance between river sources
+    edgify : bool, default: True
+        Plot rivers through hexagons' edges
+    curv : int or None, default: None
+        If None, edgified river curvature increases as river gets closer to
+        the ocean. Otherwise curvature will be fixed, the higher the value is.
+    """
     # Prepare pool of points that can be river sources
     pool = [
-        he for he, alt in hm.items()
+        he
+        for he, alt in hm.items()
         if alt > source_min_alt and len(hm.mapped_neighbors(he)) == 6
     ]
 

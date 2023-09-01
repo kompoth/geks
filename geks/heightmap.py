@@ -17,7 +17,7 @@ def gen_heightmap(hm, sk=0.5, max_alt=255, seed=None):
     sk : float
         Determines terrain smoothness
     max_alt : int
-        Maximum altitude.
+        Maximum altitude
     seed : list[int], optional
         Altitudes for 7 initial tiles
     """

@@ -22,8 +22,20 @@ def test_fill_sinks_py():
     geks.gen_heightmap(hm)
     geks.fill_sinks_py(hm)
 
+    for he in hm:
+        alt = hm[he]
+        nes = hm.mapped_neighbors(he)
+        if len(nes) == 6:
+            assert any([alt > hm[ne] for ne in nes])
+
 
 def test_fill_sinks_cy():
     hm = geks.RectHexmap(None, (40, 20))
     geks.gen_heightmap(hm)
     geks.fill_sinks_cy(hm)
+
+    for he in hm:
+        alt = hm[he]
+        nes = hm.mapped_neighbors(he)
+        if len(nes) == 6:
+            assert any([alt > hm[ne] for ne in nes])
