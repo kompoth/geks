@@ -10,7 +10,6 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'geks'
-version = '0.0.2'
 requires-python = '>= 3.10'
 dependencies = [
     'numpy >= 1.23.5'
@@ -35,6 +34,7 @@ classifiers = [
 authors = [
     { name = 'Vasily Negrebetskiy', email = 'kmiziz.com@gmail.com'}
 ]
+dynamic = ['version']
 
 [project.urls]
 source = 'https://github.com/kompoth/geks'
@@ -44,6 +44,9 @@ mpl = ['matplotlib >= 3.6.3']
 
 [tool.setuptools]
 packages = ['geks', 'geks.front', 'geks.cython']
+
+[tool.setuptools.dynamic]
+version = {attr = "geks.__version__"}
 
 [tool.black]
 line-length = 79
