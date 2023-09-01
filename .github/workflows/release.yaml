@@ -43,7 +43,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Install dependencies
-        run: pip install -r requirements_dev.txt
+        run: pip install -r requirements_build.txt
       - name: Build tarball
         run: |
           make build_ext
