@@ -1,22 +1,34 @@
 # Geks
 
-Geks is a toolkit for hexagonal mapmaking. 
-
+<p align="center">
+    <a href="https://pypi.org/project/geks" target="_blank">
+        <img src="https://img.shields.io/pypi/v/geks" alt="Package version">
+    </a>
+    <a href="https://pypi.org/project/geks" target="_blank">
+        <img src="https://img.shields.io/pypi/pyversions/geks.svg" alt="Supported Python versions">
+    </a> 
+</p>
 <p align="center">
     <img src="https://raw.githubusercontent.com/kompoth/geks/main/img/example.png" width="400">
 </p>
 
+Geks is a Python toolkit for generating geographical maps in a hexagonal lattice.
+
 ## Installation
 
-Currently there is no PyPI package.
+To install latest version from PyPI:
+```bash
+pip install geks[mpl]
+```
+Suffix `mpl` means that Geks will be installed with `matplotlib` that powers a
+testing front-end.
 
 To install development version from GitHub (preferably in a virtual environment):
 ```bash
 git clone https://github.com/kompoth/geks.git
 make install-mpl
 ```
-Suffix `mpl` means that Geks will be installed with `matplotlib` that powers a
-testing front-end. See other build and install commands in `Makefile`.
+See other build and install commands in `Makefile`.
 
 ## Credits
 
