@@ -10,9 +10,34 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'geks'
-version = '0.1.0'
+version = '0.0.2'
 requires-python = '>= 3.10'
-dependencies = ['numpy >= 1.23.5']
+dependencies = [
+    'numpy >= 1.23.5'
+]
+description = 'Hexagonal mapmaking toolkit'
+readme = 'README.md'
+classifiers = [
+    'Development Status :: 2 - Pre-Alpha',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Software Development',
+    'Intended Audience :: Developers',
+    'Operating System :: OS Independent',
+    'Programming Language :: Python',
+    'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Cython',
+    'License :: OSI Approved :: MIT License'
+]
+authors = [
+    { name = 'Vasily Negrebetskiy', email = 'kmiziz.com@gmail.com'}
+]
+
+[project.urls]
+source = 'https://github.com/kompoth/geks'
 
 [project.optional-dependencies]
 mpl = ['matplotlib >= 3.6.3']
