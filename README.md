@@ -8,7 +8,7 @@
         <img src="https://img.shields.io/pypi/pyversions/geks.svg" alt="Supported Python versions">
     </a> 
     <a href='https://coveralls.io/github/kompoth/geks?branch=main'>
-        <img src='https://coveralls.io/repos/github/kompoth/geks/badge.svg?branch=main' alt='Coverage Status' />
+        <img src='https://coveralls.io/repos/github/kompoth/geks/badge.svg?branch=main&kill_cache=1' alt='Coverage Status' />
     </a>
 </p>
 <p align="center">
