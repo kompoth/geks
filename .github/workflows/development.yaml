@@ -1,7 +1,7 @@
 name: Development
 on:
   push:
-    branches: [ main ]
+    branches: [ main , v0.0.2]
   pull_request:
     branches: [ main ]
 
@@ -38,7 +38,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements_test.txt
+        pip install -r requirements_dev.txt
     - name: Build extensions
       run: make build_ext
     - name: Run tests 
@@ -51,8 +51,14 @@ jobs:
         flag-name: run-${{ join(matrix.*, '-') }}
         git-branch: main
         parallel: true
+    - name: Test examples
+      run: |
+        make install;
+        for i in examples/*.py; do
+            python $i && echo "$i is ok" || echo "$i fails";
+        done;
 
-  finish:
+  finish-coverage:
     name: Finalizing
     needs: test
     runs-on: ubuntu-latest

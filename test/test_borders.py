@@ -6,6 +6,6 @@ def test_edge_equal():
     di = geks.Hex((1, 1))
     edge0 = geks.HexEdge(he, di, 1)
 
-    ne = he + di 
+    ne = he + di
     edge1 = geks.HexEdge(ne, he - ne, 1)
     assert edge0 == edge1

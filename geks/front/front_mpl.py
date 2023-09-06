@@ -27,12 +27,6 @@ class FrontMPL:
             lambda x: print(self.layout.pixel2hex((x.xdata, x.ydata)).round()),
         )
 
-    def show(self):
-        """Shows rendered objects with selected matplotlib backend"""
-        plt.gca().invert_yaxis()
-        plt.autoscale(enable=True)
-        plt.show()
-
     def plot_hex(
         self, he, fill=False, fillcolor=None, edgecolor=None, alpha=1
     ):

@@ -1,6 +1,8 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 import geks
 from geks.front import FrontMPL
-import numpy as np
 
 # Prepare height map
 hm = geks.RoundHexmap(0, 32)
@@ -26,4 +28,8 @@ mpl.plot_hexmap(
 for edges in geks.generate_rivers(hm, 10, ocean_alt, source_min_alt):
     mpl.plot_border(edges, color="#1F3C41", width=1.2)
 
-mpl.show()
+# Save resulting image
+mpl.fig.set_size_inches(16, 16)
+plt.gca().invert_yaxis()
+plt.autoscale(enable=True)
+plt.savefig("example.png", transparent=True)

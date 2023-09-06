@@ -2,9 +2,10 @@
 Usage example showing how to map hexagons with different properties,
 calculate path and rendering result with a debug front end.
 """
+import matplotlib.pyplot as plt
+
 import geks
 from geks.front import FrontMPL
-
 
 # Create rectangular map of unblocked hexagons with pointy top
 default_value = {"price": 1, "blocked": False}
@@ -22,16 +23,16 @@ for bl in blocked:
 # Set rugged terrain by drawing a circle
 swamps = geks.hex_circle(geks.Hex((3, 0)), 1)
 for sw in swamps:
-    if sw in hm.map:
-        hm.map[sw]["price"] = 5
+    if sw in hm:
+        hm[sw]["price"] = 5
 
 # Draw hexagons according to their values
-for he, value in hm.map.items():
+for he, value in hm.items():
     mpl.plot_hex(
         he,
         fill=value["blocked"] or value["price"] > 1,
         fillcolor="grey" if value["blocked"] else "lightgreen",
-        edgecolor="lightgrey",
+        edgecolor="black",
     )
 
 # Highlight start and target hexagons
@@ -41,15 +42,18 @@ mpl.plot_hex(start, fill=True, fillcolor="lightblue")
 mpl.plot_hex(target, fill=True, fillcolor="orange")
 
 # Build path
-path, nstep, nit = geks.dijkstra_path(
+path, nstep = geks.dijkstra_path(
     hm,
     start,
     target,
     distance=40,
-    block_func=lambda y, x: hm.map[x]["blocked"],  # walls condition
-    cost_func=lambda y, x: hm.map[x]["price"],  # cost of movement
+    block_func=lambda y, x: hm[x]["blocked"],  # walls condition
+    cost_func=lambda y, x: hm[x]["price"],  # cost of movement
 )
-mpl.plot_path(path, color="darkblue")
+mpl.plot_path(path, width=2, color="darkblue")
 
-# Show results
-mpl.show()
+# Save resulting image
+mpl.fig.set_size_inches(10, 8)
+plt.gca().invert_yaxis()
+plt.autoscale(enable=True)
+test.savefig("example.png", transparent=False)
