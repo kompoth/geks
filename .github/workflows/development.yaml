@@ -1,7 +1,7 @@
 name: Development
 on:
   push:
-    branches: [ main , v0.0.2]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
@@ -20,7 +20,7 @@ jobs:
       run: pip install flake8 && flake8
 
   test:
-    name: Test ${{ matrix.platform }} Python ${{ matrix.python-version }} 
+    name: Test on ${{ matrix.platform }} Python ${{ matrix.python-version }} 
     needs: lint
     strategy:
       max-parallel: 6
@@ -54,7 +54,7 @@ jobs:
         parallel: true
 
   examples:
-    name: Test examples Python ${{ matrix.python-version }}
+    name: Run examples on Python ${{ matrix.python-version }}
     needs: lint
     strategy:
       max-parallel: 6
