@@ -16,6 +16,7 @@ class FrontMPL:
         self.layout = layout
         self.fig, self.ax = plt.subplots(1)
         self.ax.set_aspect("equal")
+        self.ax.set(frame_on=False)
 
         self.ax.set_yticklabels([])
         self.ax.set_xticklabels([])
