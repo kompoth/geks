@@ -1,4 +1,2 @@
-Cython>=3.0.2
-numpy>=1.23.5
 pytest>=7.4.0
 pytest-cov>=4.1.0

@@ -130,7 +130,7 @@ class RectHexmap(Hexmap):
         """Returns central hexagon."""
         center = self.dims // 2
         if self.flat:
-            pass
+            center[1] -= center[0] // 2
         else:
             center[0] -= center[1] // 2
         return Hex(center)

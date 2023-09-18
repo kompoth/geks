@@ -77,8 +77,7 @@ def generate_rivers(
     ocean_alt,
     source_min_alt,
     source_min_dist=2,
-    edgify=True,
-    curv=None,
+    curv=None
 ):
     """
     Generates rivers from the given minimal altitude to the ocean level or the
@@ -96,8 +95,6 @@ def generate_rivers(
         Minimal altitude of river sources
     source_min_dist : int, default: 2
         Minimal distance between river sources
-    edgify : bool, default: True
-        Plot rivers through hexagons' edges
     curv : int or None, default: None
         If None, edgified river curvature increases as river gets closer to
         the ocean. Otherwise curvature will be fixed, the higher the value is.
@@ -119,9 +116,6 @@ def generate_rivers(
         busy = [he for he in river] + hex_circle(source, source_min_dist)
         pool = [he for he in pool if he not in busy]
         it += 1
-
-    if not edgify:
-        return rivers
 
     # Direct rivers through edges of hexagons and handle mergers
     all_edges = []
