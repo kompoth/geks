@@ -31,15 +31,15 @@ for he, value in hm.items():
     mpl.plot_hex(
         he,
         fill=value["blocked"] or value["price"] > 1,
-        fillcolor="grey" if value["blocked"] else "lightgreen",
+        facecolor="grey" if value["blocked"] else "lightgreen",
         edgecolor="black",
     )
 
 # Highlight start and target hexagons
 start = geks.Hex((0, 0))
 target = geks.Hex((11, 2))
-mpl.plot_hex(start, fill=True, fillcolor="lightblue")
-mpl.plot_hex(target, fill=True, fillcolor="orange")
+mpl.plot_hex(start, facecolor="lightblue")
+mpl.plot_hex(target, facecolor="orange")
 
 # Build path
 path, nstep = geks.dijkstra_path(
@@ -50,10 +50,10 @@ path, nstep = geks.dijkstra_path(
     block_func=lambda y, x: hm[x]["blocked"],  # walls condition
     cost_func=lambda y, x: hm[x]["price"],  # cost of movement
 )
-mpl.plot_path(path, width=2, color="darkblue")
+mpl.plot_path(path, lw=2, color="darkblue")
 
 # Save resulting image
 mpl.fig.set_size_inches(10, 8)
 plt.gca().invert_yaxis()
 plt.autoscale(enable=True)
-plt.savefig("example.png", transparen=False)
+plt.savefig("example.png")

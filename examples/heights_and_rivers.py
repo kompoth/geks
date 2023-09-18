@@ -26,7 +26,7 @@ mpl.plot_hexmap(
 
 # Generate 10 rivers
 for edges in geks.generate_rivers(hm, 10, ocean_alt, source_min_alt):
-    mpl.plot_border(edges, color="#1F3C41", width=1.2)
+    mpl.plot_border(edges, color="#1F3C41", lw=1.2)
 
 # Save resulting image
 mpl.fig.set_size_inches(16, 16)
